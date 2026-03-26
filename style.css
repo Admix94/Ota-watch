@@ -1,0 +1,199 @@
+:root {
+    --bg: #0b1220;
+    --card-bg: #161d2f;
+    --accent: #8b5cf6;
+    --accent-hover: #7c3aed;
+    --text: #ffffff;
+    --text-dim: #94a3b8;
+    --header-blur: rgba(11, 18, 32, 0.8);
+}
+
+* { box-sizing: border-box; outline: none; }
+
+body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+}
+
+/* Header */
+.main-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 5%;
+    position: sticky;
+    top: 0;
+    background: var(--header-blur);
+    backdrop-filter: blur(12px);
+    z-index: 100;
+    transition: 0.3s;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    cursor: pointer;
+    letter-spacing: -1px;
+}
+
+.logo span { color: var(--accent); }
+
+.search-container {
+    flex: 0 1 400px;
+    position: relative;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 12px 20px;
+    border-radius: 30px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.05);
+    color: white;
+    transition: 0.3s;
+}
+
+#searchInput:focus {
+    background: rgba(255,255,255,0.1);
+    border-color: var(--accent);
+}
+
+/* Shelf Styling (Netflix style) */
+.shelf-container { padding: 20px 5%; }
+.shelf-title { font-size: 1.2rem; margin-bottom: 15px; font-weight: 600; }
+
+.shelf {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    padding-bottom: 20px;
+    scrollbar-width: none;
+}
+.shelf::-webkit-scrollbar { display: none; }
+
+.anime-card {
+    flex: 0 0 180px;
+    cursor: pointer;
+    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.anime-card:hover { transform: scale(1.05); }
+
+.anime-card img {
+    width: 100%;
+    aspect-ratio: 2/3;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+.anime-card p {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Hero Section */
+.hero {
+    height: 60vh;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    padding: 5%;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, var(--bg) 0%, transparent 100%);
+}
+
+/* Player Overlay */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+.overlay.hidden { display: none; }
+
+.player-wrapper {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: #000;
+}
+
+iframe { width: 100%; height: 100%; border: none; }
+
+.content-details {
+    padding: 30px 5%;
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 40px;
+}
+
+.meta-row { display: flex; gap: 15px; margin: 15px 0; color: var(--text-dim); }
+.rating-tag { color: #10b981; font-weight: bold; }
+
+.ep-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.ep-btn {
+    background: var(--card-bg);
+    border: none;
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.ep-btn.active { background: var(--accent); }
+.ep-btn:hover { background: var(--accent-hover); }
+
+.close-overlay {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1100;
+    background: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Skeleton Loader */
+.skeleton {
+    background: linear-gradient(90deg, #161d2f 25%, #1f2937 50%, #161d2f 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+@media (max-width: 768px) {
+    .content-details { grid-template-columns: 1fr; }
+    .hero { height: 40vh; }
+    .anime-card { flex: 0 0 140px; }
+}
