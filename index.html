@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kogemi+ | Stream Anime</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="main-header">
+        <div class="logo" onclick="location.reload()">KOGEMI<span>+</span></div>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search anime, movies, OVAs...">
+            <div id="searchSuggestions" class="suggestions"></div>
+        </div>
+        <nav>
+            <button class="nav-btn active" onclick="showHome()">Home</button>
+            <button class="nav-btn">Trending</button>
+        </nav>
+    </header>
+
+    <main id="app">
+        <!-- Hero Section (Featured) -->
+        <section id="hero" class="hero"></section>
+
+        <!-- Continue Watching (LocalStorage) -->
+        <section id="continueSection" class="shelf-container hidden">
+            <h2 class="shelf-title">Continue Watching</h2>
+            <div class="shelf" id="continueList"></div>
+        </section>
+
+        <!-- Trending Section -->
+        <section class="shelf-container">
+            <h2 class="shelf-title">Trending Now</h2>
+            <div class="shelf" id="trendingList"></div>
+        </section>
+
+        <!-- Popular Section -->
+        <section class="shelf-container">
+            <h2 class="shelf-title">Popular This Season</h2>
+            <div class="shelf" id="popularList"></div>
+        </section>
+
+        <!-- Search Results (Hidden by default) -->
+        <section id="searchResults" class="search-results hidden">
+            <h2 class="shelf-title">Search Results</h2>
+            <div class="grid" id="searchGrid"></div>
+        </section>
+    </main>
+
+    <!-- Player & Details Overlay -->
+    <div id="playerOverlay" class="overlay hidden">
+        <div class="overlay-content">
+            <button class="close-overlay" onclick="closePlayer()">✕</button>
+            
+            <div class="player-wrapper">
+                <iframe id="mainIframe" allowfullscreen scrolling="no"></iframe>
+            </div>
+
+            <div class="content-details">
+                <div class="details-text">
+                    <h1 id="detailTitle">---</h1>
+                    <div class="meta-row">
+                        <span id="detailRating" class="rating-tag">0.0</span>
+                        <span id="detailYear">2024</span>
+                        <span id="detailStatus">Ongoing</span>
+                        <span id="detailEpisodes">-- Eps</span>
+                    </div>
+                    <p id="detailDesc">Loading description...</p>
+                    
+                    <div class="controls-row">
+                        <select id="serverSelect" onchange="changeServer()">
+                            <option value="primary">Server 1 (Primary)</option>
+                            <option value="backup">Server 2 (Backup)</option>
+                        </select>
+                        <button class="btn-ctrl" onclick="prevEp()">Prev</button>
+                        <button class="btn-ctrl" onclick="nextEp()">Next</button>
+                    </div>
+                </div>
+
+                <div class="episode-selection">
+                    <h3>Episodes</h3>
+                    <div id="episodeGrid" class="ep-grid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
